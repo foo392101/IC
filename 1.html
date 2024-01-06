@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integral Calculator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.2.1/math.min.js"></script>
+    <script src="C:\Users\Toshiba\OneDrive\Desktop\integral"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.2.1/math.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.2.1/math.js.map"></script>
+
+</head>
+<body>
+
+<h2>Integral Calculator</h2>
+
+<label for="expression">Enter Expression:</label>
+<input type="text" id="expression" placeholder="">
+
+<div>
+    <button onclick="appendToExpression('0')">0</button>
+    <button onclick="appendToExpression('1')">1</button>
+    <button onclick="appendToExpression('2')">2</button>
+    <button onclick="appendToExpression('3')">3</button>
+    <button onclick="appendToExpression('4')">4</button>
+    <button onclick="appendToExpression('5')">5</button>
+    <button onclick="appendToExpression('6')">6</button>
+    <button onclick="appendToExpression('7')">7</button>
+    <button onclick="appendToExpression('8')">8</button>
+    <button onclick="appendToExpression('9')">9</button>
+    <button onclick="appendToExpression('+')">+</button>
+    <button onclick="appendToExpression('-')">-</button>
+    <button onclick="appendToExpression('*')">*</button>
+    <button onclick="appendToExpression('/')">/</button>
+    <button onclick="appendToExpression('^')">^</button>
+    <button onclick="clearExpression()">C</button>
+    <button onclick="appendToExpression('x')">x</button>
+</div>
+
+<button onclick="calculateIntegration()">Calculate Integration</button>
+<button onclick="calculatePartialFractions()">Calculate Partial Fractions</button>
+
+<p id="result">Result: </p>
+
+<script>
+    function appendToExpression(value) {
+        document.getElementById('expression').value += value;
+    }
+
+    function clearExpression() {
+        document.getElementById('expression').value = '';
+    }
+
+    function calculateIntegration() {
+        const expression = document.getElementById('expression').value;
+
+        try {
+            const result = math.simplify(math.integrate(expression, 'x'));
+            document.getElementById('result').textContent = 'Integration Result: ' + result;
+        } catch (error) {
+            document.getElementById('result').textContent = 'Error: ' + error.message;
+        }
+    }
+
+    function calculatePartialFractions() {
+        const expression = document.getElementById('expression').value;
+
+        try {
+            const result = math.simplify(math.partialFraction(expression, 'x'));
+            document.getElementById('result').textContent = 'Partial Fractions Result: ' + result;
+        } catch (error) {
+            document.getElementById('result').textContent = 'Error: ' + error.message;
+        }
+    }
+</script>
+
+</body>
+</html>
